@@ -1,7 +1,10 @@
-from Auth.schemas import User, UserCreate, Token, UserCredentials, UserWorkSpace
-from db.userdatabase import users, database, workspaces
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy import delete, update
+# from Auth.schemas import User, UserCreate, Token, UserCredentials, UserWorkSpace
+# from db.userdatabase import users, database, workspaces
+# from fastapi import FastAPI, Depends, HTTPException
+# from sqlalchemy import delete, update
+
+from common_imports import *
+
 
 async def delete_user_workspace(workspace_id: int, current_user: User):
     # Check if the workspace with the given ID belongs to the current user
