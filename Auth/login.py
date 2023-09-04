@@ -15,8 +15,8 @@ async def login_for_access_token(user_credentials: UserCredentials, db: Database
         JSONResponse(content={"error": "Something went wrong."}, status_code=400)
 
 
-    user_workspace_path = os.path.join("workspace/users", user["email"])
-    os.makedirs(user_workspace_path, exist_ok=True)
+    # user_workspace_path = os.path.join("workspace/users", user["email"])
+    # os.makedirs(user_workspace_path, exist_ok=True)
     # lib_path = os.path.join(user_workspace_path, "libraries")
     # models_path = os.path.join(user_workspace_path, "models")
     
@@ -39,8 +39,8 @@ async def login_for_access_with_form(form_data: OAuth2PasswordRequestForm , db: 
     access_token = create_access_token(data={"sub": user["email"], "jti":jti}, expires_delta=access_token_expires)
     refresh_token = create_refresh_token(user["email"])
 
-    user_workspace_path = os.path.join("workspace/users", user["email"])
-    os.makedirs(user_workspace_path, exist_ok=True)
+    # user_workspace_path = os.path.join("workspace/users", user["email"])
+    # os.makedirs(user_workspace_path, exist_ok=True)
     # lib_path = os.path.join(user_workspace_path, "libraries")
     # models_path = os.path.join(user_workspace_path, "models")
     # datasets_path = os.path.join(user_workspace_path, "datasets")

@@ -47,5 +47,11 @@ class UserWorkspaceData(BaseModel):
     model_path: str
     upscaling_path: str
     model_name: str
-    is_trained: str
-    models_count: int
+    is_trained: bool = False  
+    models_count: int = 0
+
+class GetUserWorkspaceData(BaseModel):
+    id: int
+    workspace_id: int
+    Type: str
+    database_path: str

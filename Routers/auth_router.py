@@ -6,11 +6,11 @@ auth_router = APIRouter()
 async def signup(user: UserCreate, db: Database = Depends(get_db)):
     return await user_signup(user, db)
 
-@auth_router.post("/token/", response_model=Token)
-async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Database = Depends(get_db)):
-    return await login_for_access_with_form(form_data, db)
+# @auth_router.post("/token/", response_model=Token)
+# async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Database = Depends(get_db)):
+#     return await login_for_access_with_form(form_data, db)
 
-@auth_router.post("/login/", response_model=Token)
+@auth_router.post("/token/", response_model=Token)
 async def login(user_credentials: UserCredentials, db: Database = Depends(get_db)):
     return await login_for_access_token(user_credentials, db)
 
