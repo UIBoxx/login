@@ -104,12 +104,10 @@ async def get_workspace_data(wname: str, type: str, current_user: User = Depends
     csv_file_path = workspace_data[0]["database_path"]
     print(csv_file_path)
 
-    with open(csv_file_path, mode='r', encoding='utf-8') as csv_file:
-        csv_reader = csv.DictReader(csv_file)
-        json_data = [row for row in csv_reader]
-
-        print(json_data)
-
+    # with open(csv_file_path, mode='r', encoding='utf-8') as csv_file:
+    #     csv_reader = csv.DictReader(csv_file)
+    #     json_data = [row for row in csv_reader]
+    #     print(json_data)
 
     if not workspace_data:
         raise HTTPException(status_code=404, detail="No data found for this workspace and type")
