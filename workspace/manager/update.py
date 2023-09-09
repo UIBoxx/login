@@ -1,7 +1,4 @@
-from Auth.schemas import User, UserCreate, Token, UserCredentials, UserWorkSpace
-from db.userdatabase import users, database, workspaces
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy import delete, update
+from common_imports import *
 
 async def update_user_workspace(workspace_id: int, updated_workspace: UserWorkSpace, current_user: User):
     # Check if the workspace with the given ID belongs to the current user
@@ -16,7 +13,7 @@ async def update_user_workspace(workspace_id: int, updated_workspace: UserWorkSp
         "workspace_name": updated_workspace.workspace_name,
         # "model_count": updated_workspace.model_count,
         # "timestamp": updated_workspace.timestamp,
-    }
+    }   
     update_query = update(workspaces).where(workspaces.c.id == workspace_id).values(**update_values)
     await database.execute(update_query)
 

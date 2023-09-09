@@ -5,6 +5,7 @@ from Auth.schemas import User, UserCreate
 from jose import jwt, JWTError
 from userSecurity import password_context, oauth2_scheme, SECRET_KEY, ALGORITHM
 from userSecurity import token_blacklist
+from fastapi.responses import JSONResponse
 from datetime import datetime, timedelta
 
 
@@ -30,7 +31,8 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     token_id = payload.get("jti")
     # print(token_id)
     if token_id in token_blacklist:
-        raise HTTPException(status_code=401, detail="Session Expired.")
+        # raise HTTPException(status_code=401, detail="Session Expired.")
+        JSONResponse(content={"error": "Session Expired."}, status_code=401)
     return User(username=email, email=email)
 
 def create_access_token(data: dict, expires_delta: timedelta):
