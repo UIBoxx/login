@@ -29,8 +29,7 @@ import uuid
 import os
 from jose import jwt
 
-from Auth.login import login_for_access_token
-# , login_for_access_with_form
+from Auth.login import login_for_access_token, login_for_access_with_form
 from Auth.logout import user_logout
 from Auth.register import user_signup
 

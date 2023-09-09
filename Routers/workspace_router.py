@@ -24,6 +24,7 @@ async def update_workspace(workspace_id: int, updated_workspace: UserWorkSpace, 
 async def add_workspace_data(
     wname: str,
     type: str,
+
     file: UploadFile=File(...),
     current_user: User = Depends(get_current_user)
 ):
@@ -37,6 +38,8 @@ async def add_workspace_data(
         raise HTTPException(status_code=404, detail="No matching workspace was found")
 
     wid = int(wid)
+
+    model_name = f"model_{uuid.uuid1()}"
 
     user_dir = os.path.join(f"workspace/user/{current_user.email}/{wname}/{type}", "data")
     os.makedirs(user_dir, exist_ok=True)
@@ -54,7 +57,7 @@ async def add_workspace_data(
             database_path=file_path,
             model_path="",
             upscaling_path="",
-            model_name="",
+            model_name=model_name,
             is_trained= False,
             models_count=0,
         )
@@ -68,7 +71,7 @@ async def add_workspace_data(
             database_path=file_path,
             model_path="",
             upscaling_path="",
-            model_name="",
+            model_name=model_name,
             is_trained=False,
             models_count=0,
         )

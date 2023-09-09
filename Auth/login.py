@@ -19,16 +19,18 @@ async def login_for_access_token(user_credentials: UserCredentials, db: Database
     return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
 
 
-# async def login_for_access_with_form(form_data: OAuth2PasswordRequestForm , db: Database):
-#     user = await get_user(form_data.username, db)
-#     if not user or not password_context.verify(form_data.password, user['hashed_password']):
-#         JSONResponse(content={"error": "Incorrect email or password"}, status_code=400)
+async def login_for_access_with_form(form_data: OAuth2PasswordRequestForm , db: Database= Depends(get_db)):
+    access_token = None  # Default value
+    refresh_token = None  # Default value
+    user = await get_user(form_data.username, db)
+    if not user or not password_context.verify(form_data.password, user['hashed_password']):
+        JSONResponse(content={"error": "Incorrect email or password"}, status_code=400)
     
-#     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_DAYS)
-#     jti = str(uuid.uuid1())
-#     print(jti)
-#     access_token = create_access_token(data={"sub": user["email"], "jti":jti}, expires_delta=access_token_expires)
-#     refresh_token = create_refresh_token(user["email"])
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_DAYS)
+    jti = str(uuid.uuid1())
+    print(jti)
+    access_token = create_access_token(data={"sub": user["email"], "jti":jti}, expires_delta=access_token_expires)
+    refresh_token = create_refresh_token(user["email"])
 
-#     return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
+    return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
 
